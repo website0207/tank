@@ -18,11 +18,11 @@ public class Character : MonoBehaviour {
 
     public virtual void Update() { }
 
-    public virtual void Fire()
-    {
-        GameObject missile_clone = Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles));
-        missile_clone.SetActive(true);
-    }
+    //public virtual void Fire()
+    //{
+    //    GameObject missile_clone = Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles));
+    //    missile_clone.SetActive(true);
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

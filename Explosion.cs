@@ -8,14 +8,22 @@ public class Explosion : MonoBehaviour {
 	void Start () {
         //这种写法相当于建立了一个可以自销毁的游戏对象，但是这并不是一个好方法
         //Destroy(gameObject, live_time);
-        //Debug.Log("111");
-
-
 	}
+    private void OnEnable()
+    {
+        Invoke("Destroy", 1.5f);
+    }
 
-    //利用时间对延时进行重构，unity中Action对应c#的Event
-    //public GameObject go;
-    //public Action OnTimeupEvent;
+    private void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
 
-
+    private void OnDisable()
+    {
+        //使用这个函数的原因在于可以上面的Invoke函数是有延时的
+        //这种做法可以保证直接结束调用
+        //而不会使其在被停止使用时被停止使用两次
+        CancelInvoke();
+    }
 }

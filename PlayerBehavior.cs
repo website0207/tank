@@ -52,7 +52,7 @@ public class PlayerBehavior : Character {
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Fire();
+            //Fire();
         }
         transform.Translate(moveSpeed * new Vector3(h, v, 0) * Time.deltaTime, Space.World);
 	}

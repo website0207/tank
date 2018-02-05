@@ -53,7 +53,7 @@ public class EnemyBehavior : Character {
             if (limited_time_fire < 0)
             {
                 limited_time_fire = firetime_maxvalue;
-                Fire();
+                //Fire();
             }
         }
     }

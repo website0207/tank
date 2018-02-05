@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 //单例模式的实现
 public class SingletonBehaviour<T> : MonoBehaviour where T : Component
 {
@@ -12,14 +13,10 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : Component
         {
             if (_instance == null)
             {
-                //此处不使用GetComponent<T>()的原因在于这个类并不是挂在某个游戏对象上的?
                 //如果这个组件存在，找到它
                 _instance = FindObjectOfType<T>();
-                if (_instance = null)
+                if (_instance == null)
                 {
-                    //否则，创建它
-                    //但是这个新创建的游戏对象是什么？
-
                     GameObject obj = new GameObject();
                     _instance = obj.AddComponent<T>();
                 }
@@ -27,5 +24,23 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : Component
 
             return _instance;
         }
+    }
+
+    /// <summary>
+    /// Awake只调用一次，在脚本实例加载时执行
+    /// </summary>
+    public virtual void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        name = "_" + typeof(T).Name;
+        //可能会有问题，会和跨场景有关？
+        //if (_instance == null)
+        //{
+        //    _instance = this as T;
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }
